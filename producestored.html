@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Produce Stored</title>
+    <link rel="stylesheet" href="style2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    
+    <style>
+        * {
+  font-family: "Quicksand", sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 1000px;
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+            }
+            
+    @keyframes fadeInAnimation {
+    0% {
+         opacity: 0;
+       }
+    100% {
+          opacity: 1;
+          }
+    }
+
+  /* Navigation Bar */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 18%;
+    background-color: #f7efef;
+    height: 100%; 
+    position: fixed; 
+    overflow: auto; 
+  }
+
+  
+  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s,border-radius 0.5s;
+  }
+  
+  li a.active {
+    color: black
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  li a:hover:not(.active) {
+    color: rgb(58, 84, 46);
+    padding: 8px 16px;
+    font-weight: bold;
+  }
+
+  .last{
+    margin-top: 250px;
+    padding: 100px;
+    margin-left: -100px;
+  }
+
+  .icon {
+    width: 17px; 
+    height: 17px; 
+    margin-right: 10px; 
+    vertical-align: middle; 
+    opacity: 0; 
+    transition: opacity 0.1s; 
+}
+
+li a:hover .icon {
+  opacity: 1; 
+}
+
+.logout-button {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    margin-left: 25%;
+    font-size: 16px;
+  }
+  
+  .logout-button:hover:not(.active) {
+    color: rgb(58, 84, 46);
+    font-weight: bold;
+    border: 1px solid rgb(58, 84, 46);
+  
+  }
+  
+  .prompt {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); 
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .prompt-content {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .prompt-content h1 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .prompt-content p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .prompt-content-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .confirm-button, .cancel-button {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button {
+    background-color: #28a745; 
+  }
+  
+  .cancel-button {
+    background-color: #dc3545; 
+  }
+  
+  .confirm-button:hover {
+    background-color: #218838; 
+  }
+  
+  .cancel-button:hover {
+    background-color: #c82333; 
+  }
+  
+  
+
+.container{
+    position: absolute;
+    background-color: #ffffff;
+    padding: 30px;
+    margin-top: 2%;
+    margin-left: 25%;
+}
+
+.container h1{
+    font-family: 'Lora', serif;
+}
+
+.container a{
+    padding: auto;
+    margin: auto;
+    color: #218838;
+    font-size: 20px;
+    
+}
+
+.container img{
+    position: absolute;
+    margin-left: 100%;
+    margin-top: 2%;
+    width: 40%;
+    height: auto;
+}
+
+.c2{
+    position: absolute;
+    border-radius: 20px;
+    background-color: #00940a85;
+    padding: 30px;
+    margin-top: 10%;
+    margin-left: 0%;
+}
+
+.c2 h1,p{
+    margin-left: 30%;
+}
+
+.c2 a{
+margin-left: 30%;
+}
+
+
+.c2 img{
+    position: absolute;
+    margin-left: 0%;
+    margin-top: -3%;
+    padding: 10px;
+    width: 25%;
+    height: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+th, td {
+    border: 1px solid rgb(177, 177, 177);
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #0e8900a5;
+}
+</style>
+</head>
+
+  <body>
+  <div class="content">
+    
+    
+  <ul>
+    <img src="logo.png" style="height: auto; width: 100%;">
+    <li><a href="dashboard.html"><img src="dash.png"class="icon">Dashboard </a></li>
+    <li><a href="dashboard.html#notifs"><img src="notification.png"class="icon">Notifications</a></li>
+    <div class="last">
+      <li> <button class="logout-button" onclick="openLogoutPrompt()">Log Out</button>
+        </li>
+    </div>
+  </ul>
+
+  <div id="logout-modal" class="prompt">
+    <div class="prompt-content">
+        <h1>Confirm Logout</h1>
+        <p>Are you sure you want to logout? You will be redirected to the login page.</p>
+        <div class="prompt-buttons">
+            <button class="confirm-button" onclick="confirmLogout()">Yes, Logout</button>
+            <button class="cancel-button" onclick="closeLogoutPrompt()">Cancel</button>
+        </div>
+    </div>
+</div>
+  <script>
+    function openLogoutPrompt() {
+        document.getElementById('logout-modal').style.display = 'flex';
+    }
+
+    function closeLogoutPrompt() {
+        document.getElementById('logout-modal').style.display = 'none';
+    }
+
+    function confirmLogout() {
+        
+        window.location.href = 'login.html';
+    }
+</script>
+
+<div class="container">
+<h1> Here's the information on your produce: </h1>
+<br>
+<table>
+    <tr>
+      <th>Produce Type</th>
+      <th>Storage Method</th>
+      <th>Temperature</th>
+      <th> Condition</th>
+    </tr>
+    <tr>
+      <td>Cabbage</td>
+      <td>Ventilation Container</td>
+      <td>23°C</td>
+      <td> Good</td>
+    </tr>
+    <tr>
+        <td>Onion</td>
+        <td>Ventilation Container</td>
+        <td>13°C</td>
+        <td> Good</td>
+      </tr>
+      <tr>
+        <td>Pumpkin</td>
+        <td>Moisture Container</td>
+        <td>17°C</td>
+        <td>Moderate</td>
+      </tr>
+      <tr>
+        <td>Carrot</td>
+        <td>Cold Storage (High Humidity)</td>
+        <td>2°C</td>
+        <td>Good</td>
+      </tr>
+      <tr>
+        <td>Apple</td>
+        <td>Earthen Cellar</td>
+        <td>0°C</td>
+        <td>Moderate</td>
+      </tr>
+      
+  </table>
+  <br>
+  <img src="vegetable.png">
+  <canvas id="myChart" style="width:100%;max-width:600px; margin-top: 10%;"></canvas>
+
+<script>
+const xValues = ["Cabbage", "Onion", "Pumpkin", "Carrot", "Apple"];
+const yValues = [5,6,3,4,2];
+const barColors = ["#2d6a4f","#52b788","#395d5b2","#b7e4c7","#184e77"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Quantity of Crops Stored (in kilograms)"
+    }
+  }
+});
+</script>
+    
+
+    
+
+<div class="c2">
+   
+        <img src="planning.png" >
+        <h1>Need More Information?</h1>
+        <br>
+        <a href="FreshCropStorage.html#connect with us">Contact Us</a>
+        <p style="font-weight: bold; margin-top: 3%;">If you have any questions or need assistance, feel free to reach out to our support team.</p>
+
+  </div>
+  <br>
+  <a href="dashboard.html"> Back </a>
+  </div>
+</div>
+
+
+
+
+
+
+</div>
+</body>
+</html>
